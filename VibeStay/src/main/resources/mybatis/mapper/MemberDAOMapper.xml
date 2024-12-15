@@ -1,2 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.VibeStay.member.MemberDAO">
+	<!-- 이메일로 회원 정보 조회 -->    
+    <select id="selectMemberByEmail" parameterType="String" resultType="com.project.VibeStay.member.MemberVO">
+	    SELECT 
+		   	MEMBER_IDX,
+	        MEMBER_ID,
+	        MEMBER_PWD,
+	        MEMBER_NAME,
+	        MEMBER_EMAIL,
+	        DEL_YN,
+	        REG_DATE,
+	        MOD_DATE
+		FROM tb_member
+		WHERE MEMBER_EMAIL=#{memberEmail} AND DEL_YN = 'N';
+    </select>
+    
+	<!-- 아이디로 회원 정보 조회 -->    
+    <select id="selectMemberById" parameterType="String" resultType="com.project.VibeStay.member.MemberVO">
+	    SELECT 
+		   	MEMBER_IDX,
+	        MEMBER_ID,
+	        MEMBER_PWD,
+	        MEMBER_NAME,
+	        MEMBER_EMAIL,
+	        DEL_YN,
+	        REG_DATE,
+	        MOD_DATE
+		FROM tb_member
+		WHERE MEMBER_ID=#{memberId} AND DEL_YN = 'N';
+    </select>
+
+</mapper>

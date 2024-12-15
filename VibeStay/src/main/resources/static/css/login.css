@@ -1,0 +1,73 @@
+/* 전체 페이지 스타일 */
+body {
+    background-color: #f4f7fc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* 로그인 컨테이너 */
+.login-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+}
+
+/* 이미지 정렬 */
+.image {
+    display: block;
+    margin: 0 auto; /* 좌우 여백을 자동으로 설정 */
+}
+
+/* 제목 스타일 */
+.login-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    color: #333;
+}
+
+/* 입력 필드 레이블 스타일 */
+.form-group label {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+/* 입력 필드 스타일 */
+.form-control {
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1rem;
+}
+
+/* 로그인 버튼 스타일 */
+.btn-primary {
+    width: 100%;
+    padding: 12px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    background-color: #FF834F;  /* 버튼 색깔 */
+    border: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: #e67e41;  /* 버튼 호버시 색 변화 */
+}
+
+/* 비밀번호 찾기 링크 스타일 */
+.forgot-password {
+    color: rgb(0, 128, 255);
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
