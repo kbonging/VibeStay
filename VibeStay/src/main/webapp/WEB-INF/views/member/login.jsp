@@ -56,7 +56,11 @@
 			        <a href="/register" class="ms-2">회원가입</a>
 			    </div>
 			</form>
-
+			<div>
+				<a href="#">
+                    <img src="/img/UI/kakao_login_medium_narrow.png" class="social_login" alt="kakao 로고" width=150">
+                </a>
+			</div>
         </div>
     </div>
     <!-- Bootstrap 5 JS -->
