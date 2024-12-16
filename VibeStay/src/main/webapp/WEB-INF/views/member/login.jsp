@@ -53,7 +53,7 @@
 			    <div class="d-flex justify-content-center small-links">
 			        <a href="/find-id" class="me-2">아이디 찾기</a> <span class="pipe">|</span>
 			        <a href="/forgot-password" class="mx-2">비밀번호 찾기</a> <span class="pipe">|</span>
-			        <a href="/register" class="ms-2"><span class="blue">회원가입</span></a>
+			        <a href="/register" class="ms-2">회원가입</a>
 			    </div>
 			</form>
 

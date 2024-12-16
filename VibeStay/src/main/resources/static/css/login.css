@@ -106,9 +106,10 @@ body {
     margin: 0 10px; /* 링크 간 간격 증가 */
 }
 
-/* .small-links a:hover {
-    text-decoration: underline;
-} */
+.small-links a:hover {
+    /* text-decoration: underline; */
+    color: #1769FF;
+}
 
 /* 로그인 상태 유지 체크박스 스타일 */
 .form-check {
@@ -161,7 +162,7 @@ body {
     color: #555;
 }
 .mb-5{
-	margin-bottom: 5rem !important;
+	margin-bottom: 3rem !important;
 }
 
 .pipe{
