@@ -1,73 +1,174 @@
-/* 전체 페이지 스타일 */
+/* 전체 레이아웃 */
 body {
-    background-color: #f4f7fc;
+    background-color: white;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.login-container {
+    width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin: 0;
 }
 
-/* 로그인 컨테이너 */
-.login-container {
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 400px;
+/* 로그인 박스 스타일 */
+.login-box {
+    width: 450px; /* 로그인 박스 크기 조금 더 크게 */
+    background-color: #ffffff;
+    border-radius: 10px; /* 둥근 모서리 */
+    padding: 50px; /* 여백 증가 */
+    box-shadow: none !important; /* 강제로 제거 */
 }
 
-/* 이미지 정렬 */
-.image {
-    display: block;
-    margin: 0 auto; /* 좌우 여백을 자동으로 설정 */
+/* 인풋박스 그룹 */
+.input-group {
+    /* margin-bottom: 20px; */ /* 간격 증가 */
+    border-radius: 10px; /* 인풋박스 모서리 둥글게 */
+    /* overflow: hidden; */ /* 모서리 처리 */
 }
 
-/* 제목 스타일 */
-.login-container h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 1.8rem;
-    color: #333;
+/* 아이콘 영역 스타일 */
+.input-group-text {
+   /*  border: 1px solid #ddd; */
+    background-color: #f7f9fc;
+    padding: 12px; /* 아이콘과 텍스트 여백 증가 */
+    border-right: none;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* 아이콘 중앙 정렬 */
 }
 
-/* 입력 필드 레이블 스타일 */
-.form-group label {
-    font-size: 1rem;
-    font-weight: bold;
+.group-input-id{
+    border-radius: 10px 0 0 0; /* 인풋박스 모서리 둥글게 */
+    border-bottom: none;
+}
+.group-input-pwd{
+    border-radius: 0 0 0 10px; /* 인풋박스 모서리 둥글게 */
 }
 
-/* 입력 필드 스타일 */
+.input-id{
+    border-radius: 0 10px 0 0 ; /* 인풋박스 모서리 둥글게 */
+    border-bottom: none;
+    
+}
+.input-pwd{
+    border-radius: 0 0 10px 0 ; /* 인풋박스 모서리 둥글게 */
+}
+
+
+.input-group-text img {
+    width: 28px; /* 아이콘 크기 증가 */
+    height: 28px;
+}
+
+/* 입력 필드 */
 .form-control {
-    border-radius: 5px;
-    padding: 10px;
-    font-size: 1rem;
+    border-left: none;
+    height: 55px; /* 입력 필드 높이 증가 */
+    font-size: 15px; /* 폰트 크기 증가 */
+    box-shadow: none; /* 포커스 효과 제거 */
+    outline: none; /* 포커스 시 외부 윤곽선 제거 */
+    padding-left: 12px; /* 텍스트 왼쪽 여백 추가 */
 }
 
-/* 로그인 버튼 스타일 */
+/* 포커스 상태에서 효과 제거 */
+.form-control:focus {
+    outline: none; /* 포커스 상태에서 외부 윤곽선 제거 */
+    box-shadow: none; /* 포커스 상태에서 그림자 제거 */
+    border-color: #ddd; /* 기존 테두리 색 유지 */
+}
+
+/* 버튼 스타일 */
 .btn-primary {
-    width: 100%;
-    padding: 12px;
-    font-size: 1.2rem;
-    border-radius: 5px;
-    background-color: #FF834F;  /* 버튼 색깔 */
+    background-color: #013c67;
     border: none;
-    color: #fff;
-    cursor: pointer;
+    height: 55px; /* 버튼 높이 증가 */
+    border-radius: 10px; /* 둥근 모서리 */
+    font-size: 18px; /* 폰트 크기 증가 */
+    text-transform: uppercase; /* 텍스트 대문자 처리 */
 }
 
 .btn-primary:hover {
-    background-color: #e67e41;  /* 버튼 호버시 색 변화 */
+    background-color: #014a81;
 }
 
-/* 비밀번호 찾기 링크 스타일 */
-.forgot-password {
-    color: rgb(0, 128, 255);
-    display: block;
+/* 작은 링크들 */
+.small-links {
     text-align: center;
-    margin-top: 10px;
+    margin-top: 20px; /* 링크와 폼 간 간격 증가 */
 }
 
-.forgot-password:hover {
+.small-links a {
+    font-size: 13px; /* 링크 폰트 크기 증가 */
+    text-decoration: none;
+    color: #666666;
+    margin: 0 10px; /* 링크 간 간격 증가 */
+}
+
+/* .small-links a:hover {
     text-decoration: underline;
+} */
+
+/* 로그인 상태 유지 체크박스 스타일 */
+.form-check {
+    text-align: left; /* 왼쪽 정렬 */
+    font-size: 13px; /* 체크박스 폰트 크기 증가 */
+    margin-bottom: 15px; /* 체크박스와 버튼 간 간격 */
+}
+
+/* ----------------------- */
+/* 체크박스 기본 스타일 제거 */
+.form-check-input {
+    width: 20px; /* 체크박스 크기 */
+    height: 20px; /* 체크박스 크기 */
+    margin-top: 0; /* 위쪽 마진 없애기 */
+    border-radius: 50%; /* 체크박스를 둥글게 */
+    vertical-align: middle; /* 텍스트와 체크박스를 수직 중앙에 맞추기 */
+    border: 2px solid #ddd; /* 체크박스 테두리 색 */
+    appearance: none; /* 기본 체크박스 스타일 제거 */
+    background-color: #fff; /* 체크박스 배경색 */
+    position: relative; /* 커스텀 체크 표시 위치를 설정할 수 있도록 */
+}
+
+
+/* 체크박스 클릭 시 주변 효과 제거 */
+.form-check-input:focus {
+    outline: none; /* 포커스 시 외부 윤곽선 제거 */
+    box-shadow: none; /* 포커스 상태에서 그림자 제거 */
+}
+
+/* 체크된 체크박스 표시 */
+.form-check-input:checked::after {
+    content: '✔'; /* 기본 체크 표시 제거 */
+    position: absolute; /* 절대 위치 설정 */
+    top: 50%; /* 수직 중앙 */
+    left: 50%; /* 수평 중앙 */
+    transform: translate(-50%, -50%); /* 정확히 중앙에 맞추기 */
+}
+
+/* 커스텀 체크 표시 추가 */
+.form-check-input:checked {
+    background-color: #fff; /* 배경색 */
+    border-color: #fff; /* 테두리 색 */
+}
+/* ----------------------- */
+
+
+/* 라벨 스타일 */
+.form-check-label {
+    margin-left: 10px;
+    color: #555;
+}
+.mb-5{
+	margin-bottom: 5rem !important;
+}
+
+.pipe{
+	font-size: 13px;
+    color: #ddd; /* 빨간색 */
+}
+
+.blue{
+	color: #1769FF;
 }

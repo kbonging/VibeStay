@@ -9,7 +9,7 @@
 </head>
 <body>
 	<a href="/main.do">
-	    <img src="/img/UI/Logo.png" class="image" alt="Example Image" width="200" height="100" />
+	     <img src="/img/UI/Main_Unique_Logo.png" class="image" alt="Example Image" width="200" height="120" />
 	</a>
 	<h1>index 페이지</h1>
 	<br>
