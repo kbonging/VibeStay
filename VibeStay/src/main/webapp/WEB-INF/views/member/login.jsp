@@ -9,6 +9,10 @@
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/login.css">
+    
+    <script type="text/javascript" src="/js/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="<c:url value='/js/login_member.js' />"></script>
+    
 </head>
 <body>
     <div class="login-container d-flex justify-content-center align-items-center vh-100">
@@ -21,13 +25,13 @@
             </div>
 
             <!-- 로그인 폼 -->
-            <form action="/member/login.do" method="post">
+            <form name="loginForm" id="loginForm" action="/member/login.do" method="post">
 			    <!-- 아이디 -->
 			    <div class="input-group">
 			        <span class="input-group-text bg-white group-input-id">
 			            <img src="/img/UI/login_id2.png" alt="아이디 아이콘" width="25">
 			        </span>
-			        <input type="text" class="form-control input-id" id="memberId" name="memberId" placeholder="아이디" required>
+			        <input type="text" class="form-control input-id" id="memberId" name="memberId" placeholder="아이디">
 			    </div>
 			
 			    <!-- 비밀번호 -->
@@ -35,8 +39,13 @@
 			        <span class="input-group-text bg-white group-input-pwd">
 			            <img src="/img/UI/login_pwd2.png" alt="비밀번호 아이콘" width="25">
 			        </span>
-			        <input type="password" class="form-control input-pwd" id="memberPwd" name="memberPwd" placeholder="비밀번호" required>
+			        <input type="password" class="form-control input-pwd" id="memberPwd" name="memberPwd" placeholder="비밀번호">
 			    </div>
+			
+				<!-- error-message (에러 알림)  -->
+				<div class="error-message-div mb-3">
+					<span class="error-message" id="error-message"></span>
+				</div>
 			
 			    <!-- 로그인 상태 유지 체크박스 -->
 			    <div class="form-check mb-3">
@@ -47,7 +56,7 @@
 			    </div>
 			
 			    <!-- 로그인 버튼 -->
-			    <button type="submit" class="btn btn-primary w-100 mb-3">로그인</button>
+			    <button type="button" id="memberLoginBtn" class="btn btn-primary w-100 mb-3" onclick="fnMemberLogin()">로그인</button>
 			
 			    <!-- 링크: 아이디 찾기 | 비밀번호 찾기 | 회원가입 -->
 			    <div class="d-flex justify-content-center small-links">
@@ -58,7 +67,7 @@
 			</form>
 			<div>
 				<a href="#">
-                    <img src="/img/UI/kakao_login_medium_narrow.png" class="social_login" alt="kakao 로고" width=150">
+                    <img src="/img/UI/kakao_login_medium_narrow.png" class="social_login" alt="kakao 로고" width="150">
                 </a>
 			</div>
         </div>

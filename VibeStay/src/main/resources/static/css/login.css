@@ -177,3 +177,10 @@ body {
 .social_login{
 	margin:2.5rem 0 5.2rem;
 }
+
+.error-message{
+	display: block; /* span을 블록 요소로 변경 */
+    text-align: left; /* 텍스트 왼쪽 정렬 */
+    font-size: 12px;
+    color:#FF322E;
+}

@@ -9,13 +9,13 @@
 </head>
 <body>
 	<a href="/main.do">
-	     <img src="/img/UI/Main_Unique_Logo.png" class="image" alt="Example Image" width="200" height="120" />
+	     <img src="/img/UI/Main_Logo_Roof.png" class="image" alt="Example Image" width="200"/>
 	</a>
 	<h1>index 페이지</h1>
 	<br>
 	<c:choose>
 		<c:when test="${not empty sessionScope.memberIdx}">
-			로그인중
+			"${sessionScope.memberName}" 님이 로그인중<br>
 			<a href="/member/logout.do">로그아웃</a>
 		</c:when>
 		<c:otherwise>
