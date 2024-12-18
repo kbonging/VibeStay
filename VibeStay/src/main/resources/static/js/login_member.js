@@ -1,28 +1,22 @@
 //입력 값 체크
-function fnValidation(){
-	if($('#memberId').val()==""){
-		$('.error-message-div').show();
-		$('#memberId').focus();
-		$('#error-message').text('아이디를 입력해 주세요');
-		return false;		
-	}else if(!validate_memberId($('#memberId').val())){
-		$('.error-message-div').show();
-		$('#memberId').focus();
-		$('#error-message').text('아이디는 영문, 숫자, _(밑줄문자)만 가능합니다.');
-		return false;
-	}
-	if(!validate_memberId($('#memberId').val())){
-		//alert('id');
-		return false;
-	}
-	if($('#memberPwd').val()==""){
-		//alert('pwd');
-		$('.error-message-div').show();
-		$('#memberPwd').focus();
-		$('#error-message').text('비밀번호를 입력해 주세요');
-		return false;
-	}
-	return true;
+function fnValidation() {
+    if ($('#memberId').val() == "") {
+        showErrorMessage('아이디를 입력해 주세요');
+        $('#memberId').focus();
+        return false;
+    } else if (!validate_memberId($('#memberId').val())) {
+        showErrorMessage('아이디는 영문, 숫자, _(밑줄문자)만 가능합니다.');
+        $('#memberId').focus();
+        return false;
+    }
+
+    if ($('#memberPwd').val() == "") {
+        showErrorMessage('비밀번호를 입력해 주세요.');
+        $('#memberPwd').focus();
+        return false;
+    }
+
+    return true;
 }
 
 /*로그인 처리*/
@@ -45,8 +39,7 @@ function fnMemberLogin(){
             if (response === true) {
                 window.location.href = "/main.do"; // 로그인 성공 시 홈 화면으로 리다이렉트
             } else {
-                $('.error-message-div').show();
-                $('#error-message').text('아이디 또는 비밀번호가 맞지 않아요. 다시 입력해 주세요');
+                showErrorMessage('아이디 또는 비밀번호가 맞지 않아요. 다시 입력해 주세요.');
             }
         },
         error: function() {
@@ -71,4 +64,16 @@ $(function(){
 function validate_memberId(id) {
 	var pattern = new RegExp(/^[a-zA-Z0-9_]+$/g);
 	return pattern.test(id);
+}
+
+// 에러 메시지 표시 함수
+function showErrorMessage(message) {
+    $('.error-message-div').show(); // 에러 메시지 영역 표시
+    $('#error-message').text(message); // 에러 메시지 설정
+    $('.error-message-div').addClass('shake-effect'); // 흔들림 효과 추가
+
+    // 흔들림 효과를 제거 (0.5초 후)
+    setTimeout(function () {
+        $('.error-message-div').removeClass('shake-effect');
+    }, 500); // 애니메이션 지속 시간과 동일하게 설정
 }
