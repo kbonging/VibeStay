@@ -90,4 +90,24 @@ public class MemberController {
     	 logger.info("@@@@@ 회원가입 페이지로 이동 @@@@@");
  		return "member/register";
     }
+    
+	/* 회원 가입 처리 ajax */
+    @PostMapping("/member/regist.do")
+    public ResponseEntity<Boolean> regist(@RequestBody MemberVO memberVO, Model model, HttpSession session, 
+			HttpServletRequest request, HttpServletResponse response) {
+    	logger.info(memberVO.toString()); // 로그
+    	
+    	boolean loginSuccess = false; // 회원가입 실패 기본값
+    	
+    	// 비밀번호 암호화 후 VO에 비밀번호 세팅
+    	memberVO.setMemberPwd(passwordEncoder.encode(memberVO.getMemberPwd()));
+    	
+    	int cnt = memberService.insertMember(memberVO);
+    	
+    	if(cnt >= 1) {
+    		loginSuccess = true;
+    	}
+    	
+    	return ResponseEntity.ok(loginSuccess); // true/false 반환
+    }
 }

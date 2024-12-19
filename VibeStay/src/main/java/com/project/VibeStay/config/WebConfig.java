@@ -24,7 +24,9 @@ public class WebConfig implements WebMvcConfigurer{
                 		"/css/**",
                 		"/img/**",
                 		"/js/**",
-                        "/member/login.do",
-                        "/member/register.do");
+                        "/member/login.do", // 로그인 페이지 및 로그인 처리
+                        "/member/register.do", // 회원 가입 페이지
+                        "/member/regist.do" // 회원 가입 처리
+                        );
     }
 }

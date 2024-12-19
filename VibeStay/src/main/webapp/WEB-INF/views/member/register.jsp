@@ -30,26 +30,26 @@
 			    <!-- 아이디 -->
 			    <div class="mb-3 text-start">
 			        <label for="memberId" class="form-label">아이디</label>
-			        <input type="text" class="form-control" id="memberId" name="memberId" placeholder="6~20자 영문, 숫자" required>
+			        <input type="text" class="form-control" id="memberId" name="memberId" placeholder="6~20자 영문, 숫자" >
 			    </div>
 			
 			    <!-- 비밀번호 -->
 			    <div class="mb-3 text-start">
 			        <label for="memberPwd" class="form-label">비밀번호</label>
-			        <input type="password" class="form-control" id="memberPwd" name="memberPwd" placeholder="8~12자 영문, 숫자, 특수문자" required>
+			        <input type="password" class="form-control" id="memberPwd" name="memberPwd" placeholder="8~12자 영문, 숫자, 특수문자" >
 			    </div>
 			
 			    <!-- 비밀번호 확인 -->
 			    <div class="mb-3 text-start">
 			        <label for="confirmMemberPwd" class="form-label">비밀번호 확인</label>
-			        <input type="password" class="form-control" id="confirmMemberPwd" name="confirmMemberPwd" placeholder="8~12자 영문, 숫자, 특수문자" required>
+			        <input type="password" class="form-control" id="confirmMemberPwd" name="confirmMemberPwd" placeholder="8~12자 영문, 숫자, 특수문자" >
 			    </div>
 			
 			    <!-- 이메일 -->
 			    <div class="mb-3 text-start">
 			        <label for="memberEmail" class="form-label">이메일</label>
 			        <div class="d-flex">
-			            <input type="email" class="form-control me-2" id="memberEmail" name="memberEmail" placeholder="예) Vibestay@gmail.com" required>
+			            <input type="email" class="form-control me-2" id="memberEmail" name="memberEmail" placeholder="예) Vibestay@gmail.com" >
 			            <button type="button" class="btn btn-secondary" id="sendEmailBtn" onclick="fnSendEmail()">인증번호 전송</button>
 			        </div>
 			    </div>
@@ -63,11 +63,11 @@
 			    <!-- 이름 -->
 			    <div class="mb-3 text-start">
 			        <label for="memberName" class="form-label">이름</label>
-			        <input type="text" class="form-control" id="memberName" name="memberName" placeholder="이름을 입력하세요" required>
+			        <input type="text" class="form-control" id="memberName" name="memberName" placeholder="이름을 입력하세요" >
 			    </div>
 			
 			    <!-- 회원가입 버튼 -->
-			    <button type="submit" id="memberRegisterBtn" class="btn btn-primary w-100 mb-3">회원가입</button>
+			    <button type="button" id="memberRegisterBtn" class="btn btn-primary w-100 mb-3" onclick="fnMemberRegist()">회원가입</button>
 			
 			    <!-- 링크: 로그인 -->
 			    <div class="d-flex justify-content-center small-links">

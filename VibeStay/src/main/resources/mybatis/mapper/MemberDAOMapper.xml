@@ -34,5 +34,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM tb_member
 		WHERE MEMBER_ID=#{memberId} AND DEL_YN = 'N';
     </select>
-
+	
+	<!-- 회원가입 (insert) -->
+	<insert id="insertMember" parameterType="com.project.VibeStay.member.MemberVO" 
+        useGeneratedKeys="true" keyProperty="memberIdx">
+	    INSERT INTO tb_member (MEMBER_ID, MEMBER_PWD, MEMBER_NAME, MEMBER_EMAIL, DEL_YN, REG_DATE)
+	    VALUES (#{memberId}, #{memberPwd}, #{memberName}, #{memberEmail}, 'N', NOW());
+</insert>
 </mapper>
