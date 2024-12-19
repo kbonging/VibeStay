@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/css/login.css">
     
     <script type="text/javascript" src="/js/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript" src="<c:url value='/js/login_member.js' />"></script>
+    <script type="text/javascript" src="<c:url value='/js/member/login_member.js' />"></script>
     
 </head>
 <body>
@@ -62,7 +62,7 @@
 			    <div class="d-flex justify-content-center small-links">
 			        <a href="/find-id" class="me-2">아이디 찾기</a> <span class="pipe">|</span>
 			        <a href="/forgot-password" class="mx-2">비밀번호 찾기</a> <span class="pipe">|</span>
-			        <a href="/register" class="ms-2">회원가입</a>
+			        <a href="/member/register.do" class="ms-2">회원가입</a>
 			    </div>
 			</form>
 			<div>

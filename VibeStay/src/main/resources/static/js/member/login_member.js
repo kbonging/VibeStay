@@ -5,7 +5,7 @@ function fnValidation() {
         $('#memberId').focus();
         return false;
     } else if (!validate_memberId($('#memberId').val())) {
-        showErrorMessage('아이디는 영문, 숫자, _(밑줄문자)만 가능합니다.');
+        showErrorMessage('아이디는 영문, 숫자만 가능합니다.');
         $('#memberId').focus();
         return false;
     }
@@ -60,9 +60,9 @@ $(function(){
 	});
 }); // $(function() 끝
 
-//아이디 영문, 숫자, 특수문자(_)만 가능
+//아이디 영문, 숫자만 가능
 function validate_memberId(id) {
-	var pattern = new RegExp(/^[a-zA-Z0-9_]+$/g);
+	var pattern = new RegExp(/^[a-zA-Z0-9]+$/g);
 	return pattern.test(id);
 }
 

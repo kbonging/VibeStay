@@ -83,4 +83,11 @@ public class MemberController {
         }
         return "redirect:/main.do"; // 메인 페이지로 리다이렉트
     }
+    
+	/* 회원 가입 페이지로 이동 */
+    @GetMapping("/member/register.do")
+    public String register() {
+    	 logger.info("@@@@@ 회원가입 페이지로 이동 @@@@@");
+ 		return "member/register";
+    }
 }
