@@ -11,7 +11,7 @@
 	<a href="/main.do">
 	     <img src="/img/UI/Main_Logo_Roof.png" class="image" alt="Example Image" width="200"/>
 	</a>
-	<h1>index 페이지</h1>
+	<h1>indSex 페이지</h1>
 	<br>
 	<c:choose>
 		<c:when test="${not empty sessionScope.memberIdx}">
