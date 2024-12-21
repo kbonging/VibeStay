@@ -3,3 +3,4 @@ INSERT INTO tb_member (MEMBER_ID, MEMBER_PWD, MEMBER_NAME, MEMBER_EMAIL,  REG_DA
 VALUES ('admin', '$2b$12$5D5ZkhMD/gRway0KpmIzzOtfLFWnoiwEIZxGryc4eKhUzxG.Bktyu', '관리자', 'apple75391@gmail.com', NOW(), NULL);
 #####################################################################################
 
+
