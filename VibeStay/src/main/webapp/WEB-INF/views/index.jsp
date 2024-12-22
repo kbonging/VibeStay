@@ -23,5 +23,6 @@
 			<a href="/member/login.do">로그인 페이지 이동</a>
 		</c:otherwise>
 	</c:choose>
+	머지 테스트
 </body>
 </html>
