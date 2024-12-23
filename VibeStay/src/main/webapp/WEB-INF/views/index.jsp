@@ -20,7 +20,7 @@
 		</c:when>
 		<c:otherwise>
 			비로그인중
-			<a href="/member/login.do">로그인 페이지 이동</a>
+			<a href="/member/login.do">로그인 페이지 이동을 하겠습니다~~~~~~dev</a>
 		</c:otherwise>
 	</c:choose>
 </body>
