@@ -40,5 +40,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         useGeneratedKeys="true" keyProperty="memberIdx">
 	    INSERT INTO tb_member (MEMBER_ID, MEMBER_PWD, MEMBER_NAME, MEMBER_EMAIL, DEL_YN, REG_DATE)
 	    VALUES (#{memberId}, #{memberPwd}, #{memberName}, #{memberEmail}, 'N', NOW());
-</insert>
+	</insert>	
+	
+	<!-- 아이디 중복 체크 -->
+	<select id="countByMemberId" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM tb_member WHERE MEMBER_ID=#{memberId};
+	</select>
 </mapper>

@@ -10,4 +10,6 @@ public interface MemberDAO {
 	public MemberVO selectMemberById(String memberId);
 	// local 회원 가입
 	public int insertMember(MemberVO memberVO);
+	// 아이디 중복 체크
+	public int countByMemberId(String memberId);
 }
