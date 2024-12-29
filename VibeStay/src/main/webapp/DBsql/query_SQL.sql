@@ -24,3 +24,6 @@ SELECT
 FROM tb_member
 WHERE MEMBER_ID='admin'AND DEL_YN = 'N';
 #####################################################
+################ 아이디 유무 확인(중복 체크) ##############
+SELECT COUNT(*) FROM tb_member WHERE MEMBER_ID='admin';
+#####################################################
