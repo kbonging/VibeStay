@@ -30,19 +30,29 @@
 			    <!-- 아이디 -->
 			    <div class="mb-3 text-start">
 			        <label for="memberId" class="form-label">아이디</label>
-			        <input type="text" class="form-control" id="memberId" name="memberId" placeholder="6~20자 영문, 숫자" >
+			        <input type="text" class="form-control" id="memberId" name="memberId" placeholder="6~20자 영문(소문자), 숫자" >
+				    <div class="error-message-div">
+						<span class="error-message" id="error-message"></span>
+					</div>
 			    </div>
 			
 			    <!-- 비밀번호 -->
 			    <div class="mb-3 text-start">
 			        <label for="memberPwd" class="form-label">비밀번호</label>
 			        <input type="password" class="form-control" id="memberPwd" name="memberPwd" placeholder="8~12자 영문, 숫자, 특수문자" >
+			        <div class="error-message-div">
+						<span class="error-message" id="error-message"></span>
+					</div>
 			    </div>
-			
+				
+				
 			    <!-- 비밀번호 확인 -->
 			    <div class="mb-3 text-start">
 			        <label for="confirmMemberPwd" class="form-label">비밀번호 확인</label>
 			        <input type="password" class="form-control" id="confirmMemberPwd" name="confirmMemberPwd" placeholder="8~12자 영문, 숫자, 특수문자" >
+			        <div class="error-message-div">
+						<span class="error-message" id="error-message"></span>
+					</div>
 			    </div>
 			
 			    <!-- 이메일 -->
@@ -52,6 +62,9 @@
 			            <input type="email" class="form-control me-2" id="memberEmail" name="memberEmail" placeholder="예) Vibestay@gmail.com" >
 			            <button type="button" class="btn btn-secondary" id="sendEmailBtn" onclick="fnSendEmail()">인증번호 전송</button>
 			        </div>
+			        <div class="error-message-div">
+						<span class="error-message" id="error-message"></span>
+					</div>
 			    </div>
 			    
 			    <!-- 인증번호 -->
@@ -64,6 +77,9 @@
 			    <div class="mb-3 text-start">
 			        <label for="memberName" class="form-label">이름</label>
 			        <input type="text" class="form-control" id="memberName" name="memberName" placeholder="이름을 입력하세요" >
+			        <div class="error-message-div">
+						<span class="error-message" id="error-message"></span>
+					</div>
 			    </div>
 			
 			    <!-- 회원가입 버튼 -->

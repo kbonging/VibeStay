@@ -30,10 +30,9 @@ public class MemberController {
 	public String memberTest(Model model) {
 		String email = "apple75391@gmail.com";
 //		MemberVO memberVO = memberService.selectMemberByEmail(email);
-		String memberId = "admin";
-		MemberVO memberVO = memberService.selectMemberById(memberId);
-		System.out.println("#############"+memberVO);
-		model.addAttribute("memberVO", memberVO);
+		int cnt = memberService.countByMemberId("admin1");
+		System.out.println("#############"+cnt);
+//		model.addAttribute("memberVO", memberVO);
 		return "index";
 	}
 	
@@ -110,4 +109,19 @@ public class MemberController {
     	
     	return ResponseEntity.ok(loginSuccess); // true/false 반환
     }
+    
+	/* 아이디 중복 체크 ajax */
+    @PostMapping("/member/checkDuplicate")
+    public ResponseEntity<Boolean> checkDuplicate(@RequestBody MemberVO memberVO){
+    	boolean isDuplicate = true;
+    	
+    	int cnt = memberService.countByMemberId(memberVO.getMemberId());
+    	
+    	if(cnt > 0) {
+    		isDuplicate = false;
+    	}
+    	
+    	return ResponseEntity.ok(isDuplicate); // true/false 반환
+    }
+    
 }
