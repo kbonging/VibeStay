@@ -30,7 +30,7 @@
 			    <!-- 아이디 -->
 			    <div class="mb-3 text-start">
 			        <label for="memberId" class="form-label">아이디</label>
-			        <input type="text" class="form-control" id="memberId" name="memberId" placeholder="6~20자 영문(소문자), 숫자" >
+			        <input type="text" class="form-control" id="memberId" name="memberId" placeholder="6~20자 영문(소문자), 숫자"  maxlength="20">
 				    <div class="error-message-div">
 						<span class="error-message" id="error-message"></span>
 					</div>
@@ -39,7 +39,7 @@
 			    <!-- 비밀번호 -->
 			    <div class="mb-3 text-start">
 			        <label for="memberPwd" class="form-label">비밀번호</label>
-			        <input type="password" class="form-control" id="memberPwd" name="memberPwd" placeholder="8~12자 영문, 숫자, 특수문자" >
+			        <input type="password" class="form-control" id="memberPwd" name="memberPwd" placeholder="8~12자 영문, 숫자, 특수문자"  maxlength="50">
 			        <div class="error-message-div">
 						<span class="error-message" id="error-message"></span>
 					</div>
@@ -49,7 +49,7 @@
 			    <!-- 비밀번호 확인 -->
 			    <div class="mb-3 text-start">
 			        <label for="confirmMemberPwd" class="form-label">비밀번호 확인</label>
-			        <input type="password" class="form-control" id="confirmMemberPwd" name="confirmMemberPwd" placeholder="8~12자 영문, 숫자, 특수문자" >
+			        <input type="password" class="form-control" id="confirmMemberPwd" name="confirmMemberPwd" placeholder="8~12자 영문, 숫자, 특수문자"  maxlength="50">
 			        <div class="error-message-div">
 						<span class="error-message" id="error-message"></span>
 					</div>
@@ -59,7 +59,7 @@
 			    <div class="mb-3 text-start">
 			        <label for="memberEmail" class="form-label">이메일</label>
 			        <div class="d-flex">
-			            <input type="email" class="form-control me-2" id="memberEmail" name="memberEmail" placeholder="예) Vibestay@gmail.com" >
+			            <input type="email" class="form-control me-2" id="memberEmail" name="memberEmail" placeholder="예) Vibestay@gmail.com"  maxlength="30">
 			            <button type="button" class="btn btn-secondary" id="sendEmailBtn" onclick="fnSendEmail()">인증번호 전송</button>
 			        </div>
 			        <div class="error-message-div">
@@ -70,13 +70,13 @@
 			    <!-- 인증번호 -->
 			    <div class="mb-3 text-start" id="verificationCodeDiv" style="display: none;">
 			        <label for="verificationCode" class="form-label">인증번호</label>
-			        <input type="text" class="form-control" id="verificationCode" name="verificationCode" placeholder="인증번호를 입력하세요">
+			        <input type="text" class="form-control" id="verificationCode" name="verificationCode" placeholder="인증번호를 입력하세요"  maxlength="8">
 			    </div>
 			    
 			    <!-- 이름 -->
 			    <div class="mb-3 text-start">
 			        <label for="memberName" class="form-label">이름</label>
-			        <input type="text" class="form-control" id="memberName" name="memberName" placeholder="이름을 입력하세요" >
+			        <input type="text" class="form-control" id="memberName" name="memberName" placeholder="이름을 입력하세요"  maxlength="10">
 			        <div class="error-message-div">
 						<span class="error-message" id="error-message"></span>
 					</div>

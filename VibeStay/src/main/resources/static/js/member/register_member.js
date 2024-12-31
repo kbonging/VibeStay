@@ -1,3 +1,7 @@
+///////// 전역 변수 ////////////
+let isMemberIdAvailable = false;
+////////////////////////////// 
+
 function fnSendEmail() {
     // 인증번호 입력창 표시
     document.getElementById('verificationCodeDiv').style.display = 'block';
@@ -109,33 +113,39 @@ function hideErrorMessage(inputId) {
 /* 회원가입 처리*/
 function fnMemberRegist(){
 	//alert("회원가입 버튼");
+	console.log(isMemberIdAvailable);
+	if(!fnValidation() || !isMemberIdAvailable){
+		if(!isMemberIdAvailable){
+			$('#memberId').focus();
+		}
+		return;
+	}else{
+		// AJAX 요청
+		$.ajax({
+	        type: "POST",
+	        url: "/member/regist.do", // 서버 요청 URL
+	        contentType: "application/json",  // content-type을 application/json으로 설정
+	        data: JSON.stringify({  // 데이터를 JSON 형식으로 변환
+	            memberId: $('#memberId').val(),
+	            memberPwd: $('#memberPwd').val(),
+	            memberName: $('#memberName').val(),
+	            memberEmail: $('#memberEmail').val()
+	        }),
+	        dataType: "json",  // 서버에서 JSON 형식으로 응답
+	        success: function(response) {
+	            if (response === true) {
+					alert("회원가입이 완료되었습니다. 로그인 후 서비스를 이용해 주세요.");
+	                window.location.href = "/main.do"; // 회원가입 성공 시 홈 화면으로 리다이렉트
+	            } else {
+	                alert("회원가입실패");
+	            }
+	        },
+	        error: function() {
+	            alert("일시적인 오류가 발생했습니다. 다시 시도해주세요. 만일 문제가 계속될 경우 고객센터(02-1234-5678)로 연락해주세요.");
+	        }
+	    }); //AJAX 끝
+	}// else 끝
 	
-	if(!fnValidation()) return;
-	
-	// AJAX 요청
-	$.ajax({
-        type: "POST",
-        url: "/member/regist.do", // 서버 요청 URL
-        contentType: "application/json",  // content-type을 application/json으로 설정
-        data: JSON.stringify({  // 데이터를 JSON 형식으로 변환
-            memberId: $('#memberId').val(),
-            memberPwd: $('#memberPwd').val(),
-            memberName: $('#memberName').val(),
-            memberEmail: $('#memberEmail').val()
-        }),
-        dataType: "json",  // 서버에서 JSON 형식으로 응답
-        success: function(response) {
-            if (response === true) {
-				alert("회원가입이 완료되었습니다. 로그인 후 서비스를 이용해 주세요.");
-                window.location.href = "/main.do"; // 회원가입 성공 시 홈 화면으로 리다이렉트
-            } else {
-                alert("회원가입실패");
-            }
-        },
-        error: function() {
-            alert("일시적인 오류가 발생했습니다. 다시 시도해주세요. 만일 문제가 계속될 경우 고객센터(02-1234-5678)로 연락해주세요.");
-        }
-    }); //AJAX 끝
 } //fnMemberRegist() 끝
 
 /*아이디 중복 체크 함수*/
@@ -149,11 +159,13 @@ function checkMemberIdDuplicate(memberId) {
         }),
 		dataType: "json", 
         success: function (response) {
-			console.log(response);
+			//console.log(response);
 			if(response){
 				showErrorMessage('memberId', '사용가능한 아이디입니다.')
+				isMemberIdAvailable = true;
 			}else{
 				showErrorMessage('memberId', '이미 사용중인 아이디입니다.')
+				isMemberIdAvailable = false;
 			}
         },
         error: function () {
@@ -171,8 +183,10 @@ $(function(){
 		console.log("test");
 		if ($('#memberId').val() === "") {
 	        showErrorMessage('memberId', '아이디를 입력하세요.');
+			isMemberIdAvailable = false;
 	    } else if (!validateInput($('#memberId').val(), /^[a-z][a-z0-9]{5,19}$/)) {
 	        showErrorMessage('memberId', '영문으로 시작하는 6~20자 영문(소문자), 숫자만 사용 가능합니다.');
+			isMemberIdAvailable = false;
 	    } else {
 	        checkMemberIdDuplicate($('#memberId').val());
 //	        hideErrorMessage('memberId'); // 유효하면 메시지 제거
