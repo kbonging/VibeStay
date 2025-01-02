@@ -70,7 +70,14 @@
 			    <!-- 인증번호 -->
 			    <div class="mb-3 text-start" id="verificationCodeDiv" style="display: none;">
 			        <label for="verificationCode" class="form-label">인증번호</label>
-			        <input type="text" class="form-control" id="verificationCode" name="verificationCode" placeholder="인증번호를 입력하세요"  maxlength="8">
+			        <div class="d-flex align-items-center">
+				        <input type="text" class="form-control me-2" id="verificationCode" name="verificationCode" placeholder="인증번호를 입력하세요"  maxlength="8">
+			            <span id="timer" class="me-2" style="font-size: 14px; color: #ff0000; display: none;"></span>
+			            <button type="button" class="btn btn-secondary" id="verificationCodeBtn" onclick="">인증하기</button>
+			        </div>
+			        <div class="error-message-div">
+						<span class="error-message" id="error-message"></span>
+					</div>
 			    </div>
 			    
 			    <!-- 이름 -->

@@ -1,12 +1,55 @@
 ///////// 전역 변수 ////////////
 let isMemberIdAvailable = false;
+
+let countdown;  // 타이머를 관리할 변수
 ////////////////////////////// 
 
+// 타이머 시작 함수
+function startTimer() {
+	let timeLeft = 5;  // 5분 (300초)
+	
+    // 타이머가 이미 실행 중이면 멈추지 않도록 처리
+    if (countdown) {
+        clearInterval(countdown);
+    }
+
+    // 타이머 갱신 함수
+    countdown = setInterval(function() {
+        let minutes = Math.floor(timeLeft / 60);
+        let seconds = timeLeft % 60;
+        
+        // 1자리 수는 0을 추가해서 표시 (예: 05)
+        document.getElementById("timer").innerHTML = 
+            `${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+        
+        // 시간이 다 되면 타이머 멈추고 버튼 숨김
+        if (timeLeft <= 0) {
+            clearInterval(countdown);
+            document.getElementById("timer").style.display = "none";  // 타이머 숨기기
+            document.getElementById("verificationCodeBtn").disabled = true;  // 버튼 비활성화
+            alert("인증 시간이 만료되었습니다.");
+        } else {
+            timeLeft--;  // 초 감소
+        }
+    }, 1000);  // 1초마다 실행
+}
+
+/*이메일 전송버튼 함수*/
 function fnSendEmail() {
     // 인증번호 입력창 표시
     document.getElementById('verificationCodeDiv').style.display = 'block';
-    alert('인증번호가 전송되었습니다. 이메일을 확인하세요.');
+    document.getElementById("verificationCodeBtn").disabled = false;  // 버튼 활성화
+	
+	// 타이머 표시 및 시작
+    document.getElementById('timer').style.display = 'inline';
+    startTimer();
+	
+	showErrorMessage('memberEmail', '인증번호가 전송되었습니다. 메일 전송에 잠시 시간이 소요될 수 있습니다.');
+	// 인증번호 전송 버튼 비활성화
+    //document.getElementById('sendEmailBtn').disabled = true;
+    //alert('인증번호가 전송되었습니다. 이메일을 확인하세요.');
 }
+
 
 /*//영문, 숫자만 가능
 function validate_memberId(id) {
@@ -53,7 +96,9 @@ function fnValidation() {
     }
     
 	/*비밀번호 확인 체크*/
-	if($('#memberPwd').val() !== $('#confirmMemberPwd').val()){
+	if($('#confirmMemberPwd').val() === ""){
+		showErrorMessage('confirmMemberPwd', '비밀번호 확인을 입력하세요.');
+	}else if($('#memberPwd').val() !== $('#confirmMemberPwd').val()){
 		showErrorMessage('confirmMemberPwd', '비밀번호가 일치하지않습니다.');
         isValid = false;
 	}else{
@@ -173,9 +218,10 @@ function checkMemberIdDuplicate(memberId) {
         }
     });
 }
-	
+
+
 $(function(){
-	alert("회원가입 개발중..\n현재 아이디 중복체크 개발 중입니다.\n입력값 유효성은 완료했지만 \"이미 사용중인 아이디입니다.\" 문구가떠도 서버요청 접근제한을 막지않아서 회원가입 시 주의 바람!");
+	alert("회원가입 개발중..(25.01.03)\n이메일 인증 기능 개발중\n아이디 중복검사 및 입력 유효성검사완료.\n\n현재 이메일인증 없이 정규식에 맞는 데이터를 넣으면 회원가입 처리는 됩니다 \n만일 해당 정규식에 맞지않은 데이터나 중복된 아이디가 서버로 넘어가는 경우 저한테 말좀 해주세요.. - bong");
 	//$('.error-message-div').hide();
 	
 	////////////////////// 아이디 중복 체크 시작 (입력값이 변할때마다 호출) ///////////////////
@@ -193,6 +239,7 @@ $(function(){
 	    }
 	});
 	//////////////////////////////// 아이디 중복 체크 끝 ////////////////////////////////
+	
 });
 
 

@@ -80,6 +80,7 @@ form .btn-primary:hover {
 }
 
 form .btn-secondary {
+	width:100px;
     background-color: #013c67; 
     border-color: #013c67;
     border-radius: 10px;
