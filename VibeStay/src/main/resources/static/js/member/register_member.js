@@ -1,12 +1,12 @@
 ///////// 전역 변수 ////////////
-let isMemberIdAvailable = false;
-
+let isMemberIdAvailable = false; // 사용 가능 아이디 확인
+let emailVerification = true; // 이메일 인증 체크 (기본값 flase로 바꿔야함 현재는 테스트중이라 ture)
 let countdown;  // 타이머를 관리할 변수
 ////////////////////////////// 
 
 // 타이머 시작 함수
 function startTimer() {
-	let timeLeft = 5;  // 5분 (300초)
+	let timeLeft = 300;  // 5분 (300초)
 	
     // 타이머가 이미 실행 중이면 멈추지 않도록 처리
     if (countdown) {
@@ -158,11 +158,14 @@ function hideErrorMessage(inputId) {
 /* 회원가입 처리*/
 function fnMemberRegist(){
 	//alert("회원가입 버튼");
-	console.log(isMemberIdAvailable);
-	if(!fnValidation() || !isMemberIdAvailable){
-		if(!isMemberIdAvailable){
-			$('#memberId').focus();
-		}
+	if(!fnValidation()){
+		return;
+	}else if(!isMemberIdAvailable){
+		console.log("아이디 중복됨");
+		$('#memberId').focus();
+		return;
+	}else if(!emailVerification){
+		console.log("이메일 인증 안됨");
 		return;
 	}else{
 		// AJAX 요청
@@ -225,7 +228,7 @@ $(function(){
 	//$('.error-message-div').hide();
 	
 	////////////////////// 아이디 중복 체크 시작 (입력값이 변할때마다 호출) ///////////////////
-	$('#memberId').on('input', function(){
+	$('#memberId').on('propertychange change keyup paste input ', function(){
 		console.log("test");
 		if ($('#memberId').val() === "") {
 	        showErrorMessage('memberId', '아이디를 입력하세요.');
