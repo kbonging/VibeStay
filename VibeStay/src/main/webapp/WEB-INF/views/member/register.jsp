@@ -32,7 +32,7 @@
 			        <label for="memberId" class="form-label">아이디</label>
 			        <input type="text" class="form-control" id="memberId" name="memberId" placeholder="6~20자 영문(소문자), 숫자"  maxlength="20">
 				    <div class="error-message-div">
-						<span class="error-message" id="error-message"></span>
+						<span class="error-message" id="error-message-memberId"></span>
 					</div>
 			    </div>
 			
@@ -50,6 +50,15 @@
 			    <div class="mb-3 text-start">
 			        <label for="confirmMemberPwd" class="form-label">비밀번호 확인</label>
 			        <input type="password" class="form-control" id="confirmMemberPwd" name="confirmMemberPwd" placeholder="8~12자 영문, 숫자, 특수문자"  maxlength="50">
+			        <div class="error-message-div">
+						<span class="error-message" id="error-message"></span>
+					</div>
+			    </div>
+			    
+			    <!-- 이름 -->
+			    <div class="mb-3 text-start">
+			        <label for="memberName" class="form-label">이름</label>
+			        <input type="text" class="form-control" id="memberName" name="memberName" placeholder="이름을 입력하세요"  maxlength="10">
 			        <div class="error-message-div">
 						<span class="error-message" id="error-message"></span>
 					</div>
@@ -75,15 +84,6 @@
 			            <span id="timer" class="me-2" style="font-size: 14px; color: #ff0000; display: none;"></span>
 			            <button type="button" class="btn btn-secondary" id="verificationCodeBtn" onclick="">인증하기</button>
 			        </div>
-			        <div class="error-message-div">
-						<span class="error-message" id="error-message"></span>
-					</div>
-			    </div>
-			    
-			    <!-- 이름 -->
-			    <div class="mb-3 text-start">
-			        <label for="memberName" class="form-label">이름</label>
-			        <input type="text" class="form-control" id="memberName" name="memberName" placeholder="이름을 입력하세요"  maxlength="10">
 			        <div class="error-message-div">
 						<span class="error-message" id="error-message"></span>
 					</div>

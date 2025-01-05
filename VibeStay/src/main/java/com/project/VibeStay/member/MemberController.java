@@ -1,7 +1,5 @@
 package com.project.VibeStay.member;
 
-import java.util.HashMap;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +8,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -28,7 +25,7 @@ public class MemberController {
 	
 	@GetMapping("/memberTest")
 	public String memberTest(Model model) {
-		String email = "apple75391@gmail.com";
+		//String email = "apple75391@gmail.com";
 //		MemberVO memberVO = memberService.selectMemberByEmail(email);
 		int cnt = memberService.countByMemberId("admin1");
 		System.out.println("#############"+cnt);
@@ -39,7 +36,7 @@ public class MemberController {
 	/* 로그인 페이지 이동 */
 	@GetMapping("/member/login.do")
 	public String login() throws Exception {
-		 logger.info("@@@@@ 로그인 페이지로 이동 @@@@@");
+		logger.info("@@@@@ 로그인 페이지로 이동 @@@@@");
 		return "member/login";
 	}
 	

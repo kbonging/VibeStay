@@ -43,7 +43,6 @@ dependencies {
 	// MySql
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	
-	
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.4'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
@@ -54,6 +53,9 @@ dependencies {
 	// SLF4J와 Logback 의존성 추가
     implementation 'org.slf4j:slf4j-api:2.0.0'
     implementation 'ch.qos.logback:logback-classic:1.4.6'
+    
+    // 이메일
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
 }
 
 tasks.named('test') {

@@ -28,7 +28,8 @@ public class WebConfig implements WebMvcConfigurer{
                         "/member/login.do", // 로그인 페이지 및 로그인 처리
                         "/member/register.do", // 회원 가입 페이지
                         "/member/regist.do", // 회원 가입 처리 (ajax)
-                        "/member/checkDuplicate" // 아이디 중복 체크 (ajax)
+                        "/member/checkDuplicate", // 아이디 중복 체크 (ajax)
+                        "/email/**"
                         );
     }
 }
