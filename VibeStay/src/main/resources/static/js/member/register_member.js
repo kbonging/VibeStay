@@ -1,6 +1,6 @@
 ///////// 전역 변수 ////////////
 let isMemberIdAvailable = false; // 사용 가능 아이디 확인
-let emailVerification = true; // 이메일 인증 체크 (기본값 flase로 바꿔야함 현재는 테스트중이라 ture)
+let emailVerification = false; // 이메일 인증 체크 (기본값 flase로 바꿔야함 현재는 테스트중이라 ture)
 let countdown;  // 타이머를 관리할 변수
 ////////////////////////////// 
 
@@ -36,18 +36,22 @@ function startTimer() {
 
 /*이메일 전송버튼 함수*/
 function fnSendEmail() {
-    // 인증번호 입력창 표시
-    document.getElementById('verificationCodeDiv').style.display = 'block';
-    document.getElementById("verificationCodeBtn").disabled = false;  // 버튼 활성화
 	
-	// 타이머 표시 및 시작
-    document.getElementById('timer').style.display = 'inline';
-    startTimer();
+	if(!validateInput($('#memberEmail').val(), /^[a-zA-Z0-9]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)){
+		showErrorMessage('memberEmail', '올바른 이메일 형식을 입력하세요.');
+		
+	}else{
+	    // 인증번호 입력창 표시
+	    document.getElementById('verificationCodeDiv').style.display = 'block';
+	    document.getElementById("verificationCodeBtn").disabled = false;  // 버튼 활성화
+		
+		// 타이머 표시 및 시작
+	    document.getElementById('timer').style.display = 'inline';
+	    startTimer();
+		
+		showErrorMessage('memberEmail', '인증번호가 전송되었습니다. 메일 전송에 잠시 시간이 소요될 수 있습니다.');
+	} // else 끝
 	
-	showErrorMessage('memberEmail', '인증번호가 전송되었습니다. 메일 전송에 잠시 시간이 소요될 수 있습니다.');
-	// 인증번호 전송 버튼 비활성화
-    //document.getElementById('sendEmailBtn').disabled = true;
-    //alert('인증번호가 전송되었습니다. 이메일을 확인하세요.');
 }
 
 
@@ -112,6 +116,9 @@ function fnValidation() {
 	    isValid = false;
 	} else if (!validateInput($('#memberEmail').val(), /^[a-zA-Z0-9]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)) {
 	    showErrorMessage('memberEmail', '올바른 이메일 형식을 입력하세요.');
+	    isValid = false;
+	} else if (!emailVerification) {
+	    showErrorMessage('memberEmail', '이메일 인증을 해주세요.');
 	    isValid = false;
 	} else {
 	    hideErrorMessage('memberEmail'); // 유효하면 메시지 제거
@@ -224,7 +231,7 @@ function checkMemberIdDuplicate(memberId) {
 
 
 $(function(){
-	alert("회원가입 개발중..(25.01.03)\n이메일 인증 기능 개발중\n아이디 중복검사 및 입력 유효성검사완료.\n\n현재 이메일인증 없이 정규식에 맞는 데이터를 넣으면 회원가입 처리는 됩니다 \n만일 해당 정규식에 맞지않은 데이터나 중복된 아이디가 서버로 넘어가는 경우 저한테 말좀 해주세요.. - bong");
+	//alert("회원가입 개발중..(25.01.03)\n이메일 인증 기능 개발중\n아이디 중복검사 및 입력 유효성검사완료.\n\n현재 이메일인증 없이 정규식에 맞는 데이터를 넣으면 회원가입 처리는 됩니다 \n만일 해당 정규식에 맞지않은 데이터나 중복된 아이디가 서버로 넘어가는 경우 저한테 말좀 해주세요.. - bong");
 	//$('.error-message-div').hide();
 	
 	////////////////////// 아이디 중복 체크 시작 (입력값이 변할때마다 호출) ///////////////////
