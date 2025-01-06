@@ -84,6 +84,39 @@ function fnSendEmail() {
 	
 }
 
+/*이메일 인증*/
+function verifyCode() {
+	var email = $("#memberEmail").val();
+    var code = $("#verificationCode").val();
+	
+	$.ajax({
+	           type: "POST",
+	           url: "/email/verifyCode",
+			   contentType: "application/json",  // content-type을 application/json으로 설정
+	   	        data: JSON.stringify({  // 데이터를 JSON 형식으로 변환
+	   	            email: email,
+					code : code
+	   	        }),
+	   	        dataType: "json", // 응답 데이터 타입을 JSON으로 설정
+	           success: function(response) {
+					if (response === true) {
+	                    alert("인증 성공!"); // 인증 성공 메시지
+						emailVerification = true;
+					    // 인증번호 입력 필드 및 버튼 숨기기
+					    $('#sendEmailBtn').hide();
+					    $('#verificationCodeDiv').hide();
+					    //$('#memberEmail').prop('disabled', true);
+						showErrorMessage('memberEmail', '인증 완료', '#007bff');
+	                } else {
+	                    alert("인증 실패! 이메일 또는 인증 코드가 일치하지 않거나 만료되었습니다."); // 인증 실패 메시지
+	                }
+	           },
+	           error: function() {
+					alert("일시적인 오류가 발생했습니다. 다시 시도해주세요. 만일 문제가 계속될 경우 고객센터(02-1234-5678)로 연락해주세요.");
+	           }
+	       });
+}
+
 function validateInput(input, pattern) {
     var regex = new RegExp(pattern);
     return regex.test(input);

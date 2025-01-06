@@ -82,7 +82,7 @@
 			        <div class="d-flex align-items-center">
 				        <input type="text" class="form-control me-2" id="verificationCode" name="verificationCode" placeholder="인증번호를 입력하세요"  maxlength="8">
 			            <span id="timer" class="me-2" style="font-size: 14px; color: #ff0000; display: none;"></span>
-			            <button type="button" class="btn btn-secondary" id="verificationCodeBtn" onclick="">인증하기</button>
+			            <button type="button" class="btn btn-secondary" id="verificationCodeBtn" onclick="verifyCode()">인증하기</button>
 			        </div>
 			        <div class="error-message-div">
 						<span class="error-message" id="error-message"></span>
