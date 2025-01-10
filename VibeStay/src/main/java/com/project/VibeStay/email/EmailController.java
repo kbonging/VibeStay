@@ -10,9 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project.VibeStay.member.MemberController;
+import com.project.VibeStay.member.MemberService;
 import com.project.VibeStay.member.MemberVO;
 
 import jakarta.mail.MessagingException;
@@ -25,15 +25,30 @@ import lombok.RequiredArgsConstructor;
 public class EmailController {
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	private final EmailService emailService;
+	private final MemberService memberService;
+	
+	/* 이메일 중복 체크 */
+	@PostMapping("/checkDuplicate")
+	public ResponseEntity<Boolean> checkDuplicate(@RequestBody MemberVO memberVO, HttpSession session){
+		logger.info("@@@@@@@ 이메일 중복 체크 메서드 @@@@@@@@@");
+		logger.info(memberVO.toString());
+		boolean isDuplicate = false;
+		
+		int cnt = memberService.countByMemberEmail(memberVO.getMemberEmail());
+		if(cnt > 0) {
+			isDuplicate = true; // 이메일이 이미 있는 경우
+		}
+		return ResponseEntity.ok(isDuplicate);
+	}
 	
 	/* 이메일 전송 */
 	@PostMapping("/sendEmail")
 	public ResponseEntity<Boolean> sendEmail(@RequestBody MemberVO memberVO, HttpSession session){
 		logger.info("@@@@@ 이메일 전송 메서드 @@@@@");
+		logger.info(memberVO.toString());
 		
 		boolean sendEmailSuccess = false; // 이메일 전송 실패
 		String randomCode = emailService.randomCode();
-		System.out.println("############" + memberVO.toString());
 		
 		// 이전 세션 값 삭제 (이메일 재전송 시)
 		session.removeAttribute("verificationEmail");
@@ -43,7 +58,6 @@ public class EmailController {
 		String email = memberVO.getMemberEmail();
 		String subject = "[VibeStay]에서 보낸 인증번호입니다.";
 		String text = emailService.createEmailContent(randomCode);
-		
 		
         try {
         	//이메일 전송

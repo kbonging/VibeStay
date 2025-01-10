@@ -29,5 +29,10 @@ public class MemberServiceImpl implements MemberService {
 	public int countByMemberId(String memberId) {
 		return memberDAO.countByMemberId(memberId);
 	}
+
+	@Override
+	public int countByMemberEmail(String memberEmail) {
+		return memberDAO.countByMemberEmail(memberEmail);
+	}
 	
 }

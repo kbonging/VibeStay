@@ -34,55 +34,82 @@ function startTimer() {
     }, 1000);  // 1초마다 실행
 }
 
-/*이메일 전송버튼 함수*/
-function fnSendEmail() {
-	let email = $('#memberEmail').val();
-	
-	if(!validateInput(email, /^[a-zA-Z0-9]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)){
-		showErrorMessage('memberEmail', '올바른 이메일 형식을 입력하세요.');
-	}else{
-	    // 인증번호 입력창 표시
-	    document.getElementById('verificationCodeDiv').style.display = 'block';
-	    document.getElementById("verificationCodeBtn").disabled = false;  // 버튼 활성화
-		
-		// 타이머 표시 및 시작
-	    document.getElementById('timer').style.display = 'inline';
-	    startTimer();
-		
-		showErrorMessage('memberEmail', '인증번호가 전송되었습니다. 메일 전송에 잠시 시간이 소요될 수 있습니다.');
-		
-		// 이메일 전송버튼 연속 요청 방지 설정
-        var sendButton = document.getElementById("sendEmailBtn");
-        sendButton.disabled = true; // 버튼 비활성화
-        
-        // 5초 후에 버튼 활성화
-        setTimeout(function() {
-            sendButton.disabled = false; // 버튼 활성화
-        }, 5000);
-		
-		$.ajax({
-	        type: "POST",
-	        url: "/email/sendEmail",
-			contentType: "application/json",  // content-type을 application/json으로 설정
-	        data: JSON.stringify({  // 데이터를 JSON 형식으로 변환
-	            memberEmail: email
-	        }),
-	        dataType: "json", // 응답 데이터 타입을 JSON으로 설정
-	        success: function(response) {
-	            if (response) {
-					console.log("이메일 전송 완료");
-	            } else {
-					console.log("이메일 전송 실패");
-	            }
-	        },
-			error: function() {
-	            alert("일시적인 오류가 발생했습니다. 다시 시도해주세요. 만일 문제가 계속될 경우 고객센터(02-1234-5678)로 연락해주세요.");
-	        }
-		}); // ajax 끝 (이메일 전송)
-		
-	} // else 끝
-	
+/* 이메일 중복 체크 함수 */
+function checkEmailDuplicate(email) {
+    return new Promise(function(resolve, reject) {
+        $.ajax({
+            type: 'POST',
+            url: '/email/checkDuplicate',
+            contentType: "application/json",
+            data: JSON.stringify({ memberEmail: email }),
+            dataType: "json",
+            success: function(response) {
+				console.log(response)
+                resolve(!!response); // 중복 여부를 반환
+            },
+            error: function() {
+                reject(); // 오류 발생 시
+            }
+        });
+    });
 }
+
+/* 이메일 전송 함수 */
+function fnSendEmail() {
+    let email = $('#memberEmail').val();
+
+    // 1. 이메일 형식 검증
+    if (!validateInput(email, /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)) {
+        showErrorMessage('memberEmail', '올바른 이메일 형식을 입력하세요.');
+        return;
+    }
+
+    // 2. 이메일 중복 체크
+    checkEmailDuplicate(email).then(function(isDuplicate) {
+        if (isDuplicate) {
+            // 중복된 경우
+            showErrorMessage('memberEmail', '이미 사용 중인 이메일입니다.');
+        } else {
+            // 중복되지 않은 경우 이메일 전송
+            showErrorMessage('memberEmail', '인증번호가 전송되었습니다. 메일 전송에 잠시 시간이 소요될 수 있습니다.');
+            
+            // 인증번호 입력창 표시 및 타이머 시작
+            document.getElementById('verificationCodeDiv').style.display = 'block';
+            document.getElementById("verificationCodeBtn").disabled = false;
+            document.getElementById('timer').style.display = 'inline';
+            startTimer();
+
+            // 이메일 전송 버튼 비활성화 및 일정 시간 후 활성화
+            let sendButton = document.getElementById("sendEmailBtn");
+            sendButton.disabled = true;
+            setTimeout(function() {
+                sendButton.disabled = false;
+            }, 5000);
+
+            // 이메일 전송 AJAX 요청
+            $.ajax({
+                type: "POST",
+                url: "/email/sendEmail",
+                contentType: "application/json",
+                data: JSON.stringify({ memberEmail: email }),
+                dataType: "json",
+                success: function(response) {
+                    if (response) {
+                        console.log("이메일 전송 완료");
+                    } else {
+                        console.log("이메일 전송 실패");
+                    }
+                },
+                error: function() {
+                    alert("일시적인 오류가 발생했습니다. 다시 시도해주세요. 만일 문제가 계속될 경우 고객센터(02-1234-5678)로 연락해주세요.");
+                }
+            });
+        }
+    }).catch(function() {
+        alert("이메일 중복 확인 중 오류가 발생했습니다. 다시 시도해주세요.");
+    });
+}
+
 
 /*이메일 인증*/
 function verifyCode() {
@@ -90,31 +117,31 @@ function verifyCode() {
     var code = $("#verificationCode").val();
 	
 	$.ajax({
-	           type: "POST",
-	           url: "/email/verifyCode",
-			   contentType: "application/json",  // content-type을 application/json으로 설정
-	   	        data: JSON.stringify({  // 데이터를 JSON 형식으로 변환
-	   	            email: email,
-					code : code
-	   	        }),
-	   	        dataType: "json", // 응답 데이터 타입을 JSON으로 설정
-	           success: function(response) {
-					if (response === true) {
-	                    alert("인증 성공!"); // 인증 성공 메시지
-						emailVerification = true;
-					    // 인증번호 입력 필드 및 버튼 숨기기
-					    $('#sendEmailBtn').hide();
-					    $('#verificationCodeDiv').hide();
-					    $('#memberEmail').prop('disabled', true);
-						showErrorMessage('memberEmail', '인증 완료', '#007bff');
-	                } else {
-	                    alert("인증 실패! 이메일 또는 인증 코드가 일치하지 않거나 만료되었습니다."); // 인증 실패 메시지
-	                }
-	           },
-	           error: function() {
-					alert("일시적인 오류가 발생했습니다. 다시 시도해주세요. 만일 문제가 계속될 경우 고객센터(02-1234-5678)로 연락해주세요.");
-	           }
-	       });
+       type: "POST",
+       url: "/email/verifyCode",
+	   contentType: "application/json",  // content-type을 application/json으로 설정
+        data: JSON.stringify({  // 데이터를 JSON 형식으로 변환
+            email: email,
+			code : code
+        }),
+        dataType: "json", // 응답 데이터 타입을 JSON으로 설정
+       success: function(response) {
+			if (response === true) {
+                alert("인증 성공!"); // 인증 성공 메시지
+				emailVerification = true;
+			    // 인증번호 입력 필드 및 버튼 숨기기
+			    $('#sendEmailBtn').hide();
+			    $('#verificationCodeDiv').hide();
+			    $('#memberEmail').prop('disabled', true);
+				showErrorMessage('memberEmail', '인증 완료', '#007bff');
+            } else {
+                alert("인증 실패! 이메일 또는 인증 코드가 일치하지 않거나 만료되었습니다."); // 인증 실패 메시지
+            }
+       },
+       error: function() {
+			alert("일시적인 오류가 발생했습니다. 다시 시도해주세요. 만일 문제가 계속될 경우 고객센터(02-1234-5678)로 연락해주세요.");
+       }
+   });
 }
 
 function validateInput(input, pattern) {
@@ -133,7 +160,10 @@ function fnValidation() {
     } else if (!validateInput($('#memberId').val(), /^[a-z][a-z0-9]{5,19}$/)) {
         showErrorMessage('memberId', '영문으로 시작하는 6~20자 영문(소문자), 숫자만 사용 가능합니다.');
         isValid = false;
-    } else {
+	} else if (/admin/.test($('#memberId').val().toLowerCase())) { // "admin" 이라는 단어가 들어가 있는지 확인
+	    showErrorMessage('memberId', '"admin"은 포함할 수 없는 단어입니다.');
+	    isValid = false;
+	} else {
        // hideErrorMessage('memberId'); // 유효하면 메시지 제거
     }
 	
@@ -276,11 +306,11 @@ function checkMemberIdDuplicate(memberId) {
         success: function (response) {
 			//console.log(response);
 			if(response){
-				showErrorMessage('memberId', '사용가능한 아이디입니다.', '#007bFF')
-				isMemberIdAvailable = true;
-			}else{
 				showErrorMessage('memberId', '이미 사용중인 아이디입니다.')
 				isMemberIdAvailable = false;
+			}else{
+				showErrorMessage('memberId', '사용가능한 아이디입니다.', '#007bFF')
+				isMemberIdAvailable = true;
 			}
         },
         error: function () {
@@ -292,12 +322,12 @@ function checkMemberIdDuplicate(memberId) {
 
 $(function(){
 	alert(`***** 필독 *****
-	(25.01.07)회원가입 개발완료.. (세부적인 요소들은 개발중입니다 100%아님)
+	(25.01.10)회원가입 개발완료.. (세부적인 보안 요소들은 개발중입니다 100%아님)
 	(완) 이메일 인증 기능 개발 완료
 	(완) 아이디 중복검사 및 입력 유효성검사완료.
 	
 	1. 해당 정규식 이외에 데이터를 입력 해보세요! 만일 해당 정규식에 맞지않은 데이터나 중복된 아이디가 서버로 넘어가는 경우 저한테 말좀 해주세요.. 
-	2. 사용자 입장에서는 구현이 완료되었지만, 내부 로직은 완벽한 상태는 아닙니다. 사용자 입장에서 회원가입 진행해보시고 수정사항 있으면 얘기해주세요.
+	2. 사용자 입장에서는 구현이 완료되었지만, 내부 보안 로직은 완벽한 상태는 아닙니다. 사용자 입장에서 회원가입 진행해보시고 수정사항 있으면 얘기해주세요.
 	3. 악의적인 요청 및 개발자 모드에서 악의적인 값 수정 했을 경우 서버에서 막는 로직은 현재 개발중 입니다. 
 	
 	본인 이메일 외 다른사람 이메일 웬만하면 쓰지마세요. 피싱으로 오해받습니다...ㅎ `);
@@ -306,14 +336,16 @@ $(function(){
 	
 	////////////////////// 아이디 중복 체크 시작 (입력값이 변할때마다 호출) ///////////////////
 	$('#memberId').on('propertychange change keyup paste input ', function(){
-		console.log("test");
 		if ($('#memberId').val() === "") {
 	        showErrorMessage('memberId', '아이디를 입력하세요.');
 			isMemberIdAvailable = false;
 	    } else if (!validateInput($('#memberId').val(), /^[a-z][a-z0-9]{5,19}$/)) {
 	        showErrorMessage('memberId', '영문으로 시작하는 6~20자 영문(소문자), 숫자만 사용 가능합니다.');
 			isMemberIdAvailable = false;
-	    } else {
+	    } else if (/admin/.test($('#memberId').val().toLowerCase())) { // "admin" 이라는 단어가 들어가 있는지 확인
+		    showErrorMessage('memberId', '"admin"은 포함할 수 없는 단어입니다.');
+		    isValid = false;
+		} else {
 	        checkMemberIdDuplicate($('#memberId').val());
 //	        hideErrorMessage('memberId'); // 유효하면 메시지 제거
 	    }

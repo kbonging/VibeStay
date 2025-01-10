@@ -110,12 +110,12 @@ public class MemberController {
 	/* 아이디 중복 체크 ajax */
     @PostMapping("/member/checkDuplicate")
     public ResponseEntity<Boolean> checkDuplicate(@RequestBody MemberVO memberVO){
-    	boolean isDuplicate = true;
+    	boolean isDuplicate = false;
     	
     	int cnt = memberService.countByMemberId(memberVO.getMemberId());
     	
     	if(cnt > 0) {
-    		isDuplicate = false;
+    		isDuplicate = true; // 이미 아이디가 존재하는 경우
     	}
     	
     	return ResponseEntity.ok(isDuplicate); // true/false 반환

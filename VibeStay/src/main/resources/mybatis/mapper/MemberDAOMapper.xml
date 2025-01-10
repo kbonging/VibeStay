@@ -46,4 +46,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="countByMemberId" parameterType="String" resultType="int">
 		SELECT COUNT(*) FROM tb_member WHERE MEMBER_ID=#{memberId};
 	</select>
+	
+	<!-- 이메일 중복 체크 -->
+	<select  id="countByMemberEmail" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM tb_member WHERE MEMBER_EMAIL=#{memberEmail};
+	</select>
 </mapper>
