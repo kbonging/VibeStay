@@ -14,6 +14,11 @@ VALUES ('devadmin', '$2b$12$/lenMCtwsZPw.JJQzb8sJOgTHwpq3Ca6J43rtToUIzrjXf8AIN.8
 -- 만일 데이터베이스에서 직접 insert 필요 시 관리자에게 문의 바랍니다.
 -- (superadmin, devadmin, 일반 유저 권한 차이 없음 걍 만든거 ㅎ 나중에 필요시 권한설정 할 예정)
 
+
+-- SET foreign_key_checks = 0;  -- 외래 키 체크 비활성화
+-- TRUNCATE TABLE tb_member;    -- 테이블 데이터 삭제
+-- SET foreign_key_checks = 1;  -- 외래 키 체크 활성화
+
 select * from tb_member;
 -- delete from tb_member where member_idx=3; -- 인덱스 번호로 회원 삭제(잘못 넣었을때만 사용)
 #####################################################################################

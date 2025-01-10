@@ -9,10 +9,6 @@ use vibestay;
 -- drop table tb_member;
 -- drop table tb_social_member;
 
--- SET foreign_key_checks = 0;  -- 외래 키 체크 비활성화
--- TRUNCATE TABLE tb_member;    -- 테이블 데이터 삭제
--- SET foreign_key_checks = 1;  -- 외래 키 체크 활성화
-
 -- tb_member 테이블 생성
 CREATE TABLE tb_member (
     MEMBER_IDX INT PRIMARY KEY AUTO_INCREMENT COMMENT '회원 고유번호', -- 회원 고유번호 (PK)

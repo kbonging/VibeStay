@@ -10,7 +10,7 @@ SELECT
 	MOD_DATE
 FROM tb_member
 WHERE MEMBER_EMAIL='apple75391@gmail.com'AND DEL_YN = 'N';
-#####################################################
+
 ################# 아이디로 회원 조회 ####################
 SELECT 
     MEMBER_IDX,
@@ -23,7 +23,9 @@ SELECT
 	MOD_DATE
 FROM tb_member
 WHERE MEMBER_ID='admin'AND DEL_YN = 'N';
-#####################################################
+
 ################ 아이디 유무 확인(중복 체크) ##############
 SELECT COUNT(*) FROM tb_member WHERE MEMBER_ID='admin';
-#####################################################
+
+################ 이메일 유무 확인(중복 체크)#############
+SELECT COUNT(*) FROM tb_member WHERE MEMBER_EMAIL='apple75391@gmail.com';
